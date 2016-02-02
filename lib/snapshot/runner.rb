@@ -97,7 +97,8 @@ module Snapshot
       File.write("/tmp/snapshot-launch_arguments.txt", launch_arguments.last)
 
       Fixes::SimulatorZoomFix.patch
-
+      Fixes::SimulatorLanguageFix.patch(language) if Snapshot.config[:force_simulator_language]
+      
       Snapshot.kill_simulator # because of https://github.com/fastlane/snapshot/issues/337
       `xcrun simctl shutdown booted &> /dev/null`
 
