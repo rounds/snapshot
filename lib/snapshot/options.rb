@@ -67,11 +67,6 @@ module Snapshot
                                      description: "By default, the latest version should be used automatically. If you want to change it, do it here",
                                      short_option: "-i",
                                      default_value: Snapshot::LatestIosVersion.version),
-        FastlaneCore::ConfigItem.new(key: :stop_after_first_error,
-                                     env_name: 'SNAPSHOT_BREAK_ON_FIRST_ERROR',
-                                     description: "Should snapshot stop immediately after one of the tests failed on one device?",
-                                     default_value: false,
-                                     is_string: false),
         FastlaneCore::ConfigItem.new(key: :skip_open_summary,
                                      env_name: 'SNAPSHOT_SKIP_OPEN_SUMMARY',
                                      description: "Don't open the HTML summary after running `snapshot`",
@@ -126,7 +121,18 @@ module Snapshot
                                      short_option: "-s",
                                      env_name: 'SNAPSHOT_SCHEME',
                                      description: "The scheme you want to use, this must be the scheme for the UI Tests",
-                                     optional: true) # optional true because we offer a picker to the user
+                                     optional: true), # optional true because we offer a picker to the user
+        FastlaneCore::ConfigItem.new(key: :number_of_retries,
+                                     short_option: "-n",
+                                     env_name: 'SNAPSHOT_NUMBER_OF_RETRIES',
+                                     description: "The number of times a test can fail before snapshot should stop retrying",
+                                     type: Integer,
+                                     default_value: 1),
+        FastlaneCore::ConfigItem.new(key: :stop_after_first_error,
+                                     env_name: 'SNAPSHOT_BREAK_ON_FIRST_ERROR',
+                                     description: "Should snapshot stop immediately after the tests completely failed on one device?",
+                                     default_value: false,
+                                     is_string: false)
       ]
     end
   end
