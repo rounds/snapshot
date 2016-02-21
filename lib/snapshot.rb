@@ -13,6 +13,8 @@ require 'snapshot/options'
 require 'snapshot/update'
 require 'snapshot/fixes/simulator_zoom_fix'
 require 'snapshot/fixes/simulator_language_fix'
+require 'snapshot/fixes/hardware_keyboard_fix'
+
 require 'fastlane_core'
 
 require 'open3'
